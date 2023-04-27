@@ -1,0 +1,27 @@
+// import dos pacotes
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+class AppEvents {
+
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+
+  Future<void> sendScreen( String screenName ) async {
+    await _analytics.setCurrentScreen(
+      screenName: screenName,
+      screenClassOverride: screenName,
+    );
+  }
+
+  Future<void> sharedEvent( String eventName ) async {
+    await _analytics.logEvent(name: eventName);
+  }
+
+  Future<void> sharedEventParams( String screenName, String name ) async {
+    final params = {"name": name};
+    await _analytics.logEvent(
+      name: screenName,
+      parameters: params,
+    );
+  }
+
+}

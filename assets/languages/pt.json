@@ -1,0 +1,36 @@
+{
+  "app_name": "Search and Stay",
+  "btn_register": "Cadastrar",
+  "btn_update": "Atualizar",
+  "pages": {
+    "auth": {
+      "email": "E-mail",
+      "register": {
+        "app_bar": "Cadastro"
+      },
+      "forgot": {
+        "app_bar": "Esqueci minha senha",
+        "change": "Alterar senha",
+        "delivered": "Mensagem enviada"
+      },
+      "alerts": {
+        "invalid_name": "Preencha um nome válido e tente novamente!",
+        "invalid_email": "Preencha um e-mail válido e tente novamente!",
+        "invalid_password": "Preencha uma senha válida e tente novamente!",
+        "redefinition_success": "Foi enviado um e-mail de redefinição de senha!",
+        "redefinition_failure": "Falha ao enviar o e-mail de redefinição de senha!",
+        "failure_register_profile": "Falha ao efetuar seu cadastro, tente novamente!",
+        "failure_login_profile": "Falha ao efetuar seu login, tente novamente!"
+      }
+    },
+    "home": {
+      "detail": {
+        "register_app_bar": "Cadastrar casa",
+        "detail_app_bar": "Detalhes"
+      }
+    }
+  },
+  "routes": {
+    "app_bar": "Tela não encontrada"
+  }
+}

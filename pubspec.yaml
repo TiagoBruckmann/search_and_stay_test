@@ -1,0 +1,66 @@
+name: search_and_stay
+description: Teste to mobile developer Search and Stay
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+5
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  firebase_performance: ^0.9.1+1
+  font_awesome_flutter: ^10.4.0
+  firebase_crashlytics: ^3.1.1
+  firebase_analytics: ^10.2.1
+  connectivity_plus: ^3.0.5
+  cloud_firestore: ^4.5.3
+  cupertino_icons: ^1.0.5
+  flutter_mobx: ^2.0.6+5
+  firebase_core: ^2.10.0
+  firebase_auth: ^4.4.2
+  flutter_i18n: ^0.32.4
+  flutter_bloc: ^8.1.2
+  injectable: ^2.1.1
+  equatable: ^2.0.5
+  provider: ^6.0.5
+  dartz: ^0.10.1
+  get_it: ^7.3.0
+  http: ^0.13.5
+  mobx: ^2.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_native_splash: ^2.2.19
+  injectable_generator: ^2.1.5
+  flutter_lints: ^2.0.1
+  mobx_codegen: ^2.2.0
+  build_runner: ^2.3.3
+  bloc_test: ^9.1.1
+  platform: ^3.1.0
+  mocktail: ^0.3.0
+  mockito: ^5.4.0
+  test: ^1.22.0
+  file: ^6.1.4
+
+# configuracao da splash
+flutter_native_splash:
+  color: "#363435"
+  image: assets/img/logo_splash.png
+  android: true
+  ios: true
+  fullscreen: true
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/img/
+    - assets/languages/

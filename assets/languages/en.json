@@ -1,0 +1,36 @@
+{
+  "app_name": "Search and Stay",
+  "btn_register": "Register",
+  "btn_update": "Update",
+  "pages": {
+    "auth": {
+      "email": "E-mail",
+      "register": {
+        "app_bar": "Register"
+      },
+      "forgot": {
+        "app_bar": "Forgot my password",
+        "change": "Change password",
+        "delivered": "Message delivered"
+      },
+      "alerts": {
+        "invalid_name": "Enter a valid name and try again!",
+        "invalid_email": "Enter a valid email and try again!",
+        "invalid_password": "Enter a valid password and try again!",
+        "redefinition_success": "Was delivered an e-mail of password redefinition!",
+        "redefinition_failure": "Failure to send the email of password redefinition!",
+        "failure_register_profile": "Failure to effect his register, try again!",
+        "failure_login_profile": "Failure to effect his login, try again!"
+      }
+    },
+    "home": {
+      "detail": {
+        "register_app_bar": "Register house",
+        "detail_app_bar": "Detail"
+      }
+    }
+  },
+  "routes": {
+    "app_bar": "Screen not found"
+  }
+}
