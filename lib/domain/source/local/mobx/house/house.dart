@@ -23,7 +23,7 @@ class HouseMobx extends _HouseMobx with _$HouseMobx {}
 
 abstract class _HouseMobx with Store {
 
-  BuildContext currentContext = Session.globalContext.currentContext!;
+  BuildContext? currentContext = Session.globalContext.currentContext;
 
   ObservableList<HouseEntity> listHouses = ObservableList();
 
@@ -133,7 +133,7 @@ abstract class _HouseMobx with Store {
   void validateName( bool isRegister, int? id ) {
     String name = nameController.text;
     if ( name.trim().isEmpty || name.length < 3 ) {
-      setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_name"));
+      setErrorMessage(FlutterI18n.translate(currentContext!, "alerts.invalid_name"));
       return;
     }
 
@@ -162,7 +162,7 @@ abstract class _HouseMobx with Store {
       (failure) => CustomSnackBar(messageKey: "alerts.create_failure"),
       (success) => {
         CustomSnackBar(messageKey: "alerts.create_success", color: AppColors.chateauGreen),
-        Navigator.pop(currentContext),
+        Navigator.pop(currentContext!),
       },
     );
   }
@@ -177,7 +177,7 @@ abstract class _HouseMobx with Store {
       (failure) => CustomSnackBar(messageKey: "alerts.update_failure"),
       (success) => {
         CustomSnackBar(messageKey: "alerts.update_success", color: AppColors.chateauGreen),
-        Navigator.pop(currentContext),
+        Navigator.pop(currentContext!),
       },
     );
   }
@@ -186,7 +186,7 @@ abstract class _HouseMobx with Store {
   void showAlert( int id ) {
     Session.appEvents.sharedEventParams("detail_show_alert_delete", {"id": id});
     showDialog(
-      context: currentContext,
+      context: currentContext!,
       builder: (builder) {
         return validateDelete(id.toString());
       },
@@ -198,11 +198,11 @@ abstract class _HouseMobx with Store {
     return Center(
       child: AlertDialog(
         title: Text(
-          FlutterI18n.translate(currentContext, "pages.home.detail.dialog.title"),
+          FlutterI18n.translate(currentContext!, "pages.home.detail.dialog.title"),
           textAlign: TextAlign.center,
         ),
         content: Text(
-          FlutterI18n.translate(currentContext, "pages.home.detail.dialog.subtitle"),
+          FlutterI18n.translate(currentContext!, "pages.home.detail.dialog.subtitle"),
           textAlign: TextAlign.center,
         ),
         contentPadding: const EdgeInsets.all(16),
@@ -210,24 +210,24 @@ abstract class _HouseMobx with Store {
 
           TextButton(
             child: Text(
-              FlutterI18n.translate(currentContext, "btn_cancel"),
+              FlutterI18n.translate(currentContext!, "btn_cancel"),
               textAlign: TextAlign.left,
               style: const TextStyle(
                 color: Colors.red,
               ),
             ),
-            onPressed: () => Navigator.pop( currentContext ),
+            onPressed: () => Navigator.pop( currentContext! ),
           ),
 
           TextButton(
             child: Text(
-              FlutterI18n.translate(currentContext, "btn_confirm"),
+              FlutterI18n.translate(currentContext!, "btn_confirm"),
               style: const TextStyle(
                 color: AppColors.orangeRed,
               ),
             ),
             onPressed: () {
-              Navigator.pop( currentContext );
+              Navigator.pop( currentContext! );
               delete(id);
             },
           ),
@@ -247,7 +247,7 @@ abstract class _HouseMobx with Store {
       (failure) => CustomSnackBar(messageKey: "alerts.delete_failure"),
       (success) => {
         CustomSnackBar(messageKey: "alerts.delete_success", color: AppColors.chateauGreen),
-        Navigator.pop(currentContext),
+        Navigator.pop(currentContext!),
       },
     );
   }
