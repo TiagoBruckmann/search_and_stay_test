@@ -1,5 +1,6 @@
 // imports nativos
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 // imports globais
 import 'package:search_and_stay/session.dart';
@@ -25,6 +26,10 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  PlatformDispatcher.instance.onError = ( error, stackTrace ) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
+    return true;
+  };
   FirebasePerformance.instance;
 
   configureDependencies();

@@ -45,11 +45,11 @@ mixin _$SplashMobx on _SplashMobx, Store {
       ActionController(name: '_SplashMobx', context: context);
 
   @override
-  void goToDashboard() {
-    final _$actionInfo = _$_SplashMobxActionController.startAction(
-        name: '_SplashMobx.goToDashboard');
+  void goToHome() {
+    final _$actionInfo =
+        _$_SplashMobxActionController.startAction(name: '_SplashMobx.goToHome');
     try {
-      return super.goToDashboard();
+      return super.goToHome();
     } finally {
       _$_SplashMobxActionController.endAction(_$actionInfo);
     }

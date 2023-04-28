@@ -1,6 +1,9 @@
 // imports nativos
 import 'package:flutter/material.dart';
 
+// imports globais
+import 'package:search_and_stay/session.dart';
+
 // import das telas
 import 'package:search_and_stay/app/core/widgets/verify_connection.dart';
 
@@ -33,6 +36,8 @@ class _DetailPageState extends State<DetailPage> {
     mobx = Provider.of<HouseMobx>(context);
     if ( !widget.isRegister ) {
       mobx.setValues(widget.houseEntity!);
+    } else {
+      Session.appEvents.sendScreen("register_house");
     }
   }
 

@@ -1,6 +1,9 @@
 // imports nativos
 import 'package:flutter/material.dart';
 
+// imports globais
+import 'package:search_and_stay/session.dart';
+
 // import das telas
 import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 import 'package:search_and_stay/app/core/widgets/verify_connection.dart';
@@ -23,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
+    Session.appEvents.sendScreen("register_user");
     mobx.setIsRegister();
   }
 

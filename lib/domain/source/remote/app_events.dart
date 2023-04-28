@@ -16,8 +16,7 @@ class AppEvents {
     await _analytics.logEvent(name: eventName);
   }
 
-  Future<void> sharedEventParams( String screenName, String name ) async {
-    final params = {"name": name};
+  Future<void> sharedEventParams( String screenName, Map<String, dynamic> params ) async {
     await _analytics.logEvent(
       name: screenName,
       parameters: params,

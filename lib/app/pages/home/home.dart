@@ -1,11 +1,13 @@
 // imports nativos
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+
+// imports globais
+import 'package:search_and_stay/session.dart';
 
 // import das telas
+import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 import 'package:search_and_stay/app/core/widgets/verify_connection.dart';
 import 'package:search_and_stay/app/core/widgets/empty_page.dart';
-import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 
 // import dos domain
 import 'package:search_and_stay/domain/source/local/mobx/house/house.dart';
@@ -14,6 +16,7 @@ import 'package:search_and_stay/domain/entity/house.dart';
 
 // import dos pacotes
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,13 +34,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    Session.appEvents.sendScreen("home");
     mobx.controllerScroll = ScrollController()..addListener(() => mobx.loadMore());
   }
 
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-    await mobx.refresh();
+  void dispose() {
+    super.dispose();
+   mobx.refresh();
   }
 
   @override

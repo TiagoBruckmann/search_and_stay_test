@@ -1,6 +1,9 @@
 // imports nativos do flutter
 import 'package:flutter/material.dart';
 
+// imports globais
+import 'package:search_and_stay/session.dart';
+
 // import das telas
 import 'package:search_and_stay/app/core/widgets/verify_connection.dart';
 import 'package:search_and_stay/app/core/style/app_images.dart';
@@ -22,6 +25,12 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   final AuthenticationMobx mobx = AuthenticationMobx();
+
+  @override
+  void initState() {
+    super.initState();
+    Session.appEvents.sendScreen("login");
+  }
 
   @override
   Widget build(BuildContext context) {

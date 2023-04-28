@@ -62,8 +62,9 @@ abstract class _AuthenticationMobx with Store {
 
   @action
   setUserEntity( UserEntity user ) {
+    Session.appEvents.sharedEvent("authentication_to_home");
     userEntity = user;
-    goToDash();
+    goToHome();
   }
 
   @action
@@ -108,6 +109,8 @@ abstract class _AuthenticationMobx with Store {
 
   @action
   Future<void> sendCodeToEmail() async {
+
+    Session.appEvents.sharedEventParams("send_email_code", {"email": emailController.text});
     final failureOrSuccess = await useCase.forgotPassword(emailController.text);
 
     failureOrSuccess.fold(
@@ -132,6 +135,7 @@ abstract class _AuthenticationMobx with Store {
       "password": passwordController.text,
     };
 
+    Session.appEvents.sharedEventParams("register", params);
     final failureOrSuccess = await useCase.registerWithEmail(params);
 
     failureOrSuccess.fold(
@@ -149,6 +153,7 @@ abstract class _AuthenticationMobx with Store {
       "password": passwordController.text,
     };
 
+    Session.appEvents.sharedEventParams("login", params);
     final failureOrSuccess = await useCase.loginWithEmail(params);
 
     failureOrSuccess.fold(
@@ -159,6 +164,8 @@ abstract class _AuthenticationMobx with Store {
 
   @action
   Future<void> logOut() async {
+
+    Session.appEvents.sharedEvent("logout");
     final failureOrSuccess = await useCase.logOut();
 
     failureOrSuccess.fold(
@@ -170,6 +177,8 @@ abstract class _AuthenticationMobx with Store {
 
   @action
   void goToLogin() {
+
+    Session.appEvents.sharedEvent("home_to_login");
     Session.localStorage.deleteAllCredentials();
     Navigator.pushNamedAndRemoveUntil(
       currentContext,
@@ -180,6 +189,7 @@ abstract class _AuthenticationMobx with Store {
 
   @action
   void goToForgot() {
+    Session.appEvents.sharedEvent("login_to_forgot");
     Navigator.pushNamed(
       currentContext,
       "/forgot_password",
@@ -188,6 +198,7 @@ abstract class _AuthenticationMobx with Store {
 
   @action
   void goToRegister() {
+    Session.appEvents.sharedEvent("login_to_register");
     Navigator.pushNamed(
       currentContext,
       "/register",
@@ -195,7 +206,9 @@ abstract class _AuthenticationMobx with Store {
   }
 
   @action
-  void goToDash() {
+  void goToHome() {
+
+    Session.appEvents.sharedEvent("authentication_to_register");
     Navigator.pushNamedAndRemoveUntil(
       currentContext,
       "/",

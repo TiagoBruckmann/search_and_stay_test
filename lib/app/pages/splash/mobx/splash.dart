@@ -36,14 +36,14 @@ abstract class _SplashMobx with Store {
   @action
   Future<void> redirect( bool connected ) async {
     if ( connected ) {
-      goToDashboard();
+      goToHome();
       return;
     }
     goToLogin();
   }
 
   @action
-  void goToDashboard() {
+  void goToHome() {
     Navigator.pushNamedAndRemoveUntil(
       currentContext,
       "/",

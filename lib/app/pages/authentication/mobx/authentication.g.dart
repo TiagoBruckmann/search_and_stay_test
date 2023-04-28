@@ -310,11 +310,11 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
   }
 
   @override
-  void goToDash() {
+  void goToHome() {
     final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
-        name: '_AuthenticationMobx.goToDash');
+        name: '_AuthenticationMobx.goToHome');
     try {
-      return super.goToDash();
+      return super.goToHome();
     } finally {
       _$_AuthenticationMobxActionController.endAction(_$actionInfo);
     }

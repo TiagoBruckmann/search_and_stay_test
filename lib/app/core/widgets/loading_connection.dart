@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+// imports globais
+import 'package:search_and_stay/session.dart';
+
 // import dos pacotes
 import 'package:flutter_i18n/flutter_i18n.dart';
 
@@ -37,6 +40,7 @@ class _LoadingConnectionState extends State<LoadingConnection> {
   void initState() {
     super.initState();
     _changeStatus();
+    Session.appEvents.sendScreen("without_ethernet");
   }
 
   @override

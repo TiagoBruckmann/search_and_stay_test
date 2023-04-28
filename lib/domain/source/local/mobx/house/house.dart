@@ -94,19 +94,30 @@ abstract class _HouseMobx with Store {
 
   @action
   void goToDetail( HouseEntity? houseEntity, bool isRegister ) {
+
+    Map<String, dynamic> params = {
+      "house_entity": houseEntity,
+      "is_register": isRegister,
+    };
+
     Navigator.pushNamed(
       Session.globalContext.currentContext!,
       "/detail",
-      arguments: {
-        "house_entity": houseEntity,
-        "is_register": isRegister,
-      },
+      arguments: params,
     );
+
+    if ( isRegister ) {
+      Session.appEvents.sharedEventParams("home_to_register", params);
+      return;
+    }
+
+    Session.appEvents.sharedEventParams("home_to_detail", params);
   }
 
   @action
   void setValues( HouseEntity entity ) {
     if ( nameController.text.trim().isEmpty ) {
+      Session.appEvents.sendScreen("detail_house");
       nameController = TextEditingController(text: entity.name);
       setActive( entity.active == 1 ? true : false );
     }
@@ -144,6 +155,7 @@ abstract class _HouseMobx with Store {
   @action
   Future<void> create(Map<String, dynamic> json) async {
 
+    Session.appEvents.sharedEventParams("register_create", json);
     final successOrFailure = await useCase.createHouse(json);
 
     successOrFailure.fold(
@@ -158,6 +170,7 @@ abstract class _HouseMobx with Store {
   @action
   Future<void> update(String id, Map<String, dynamic> json) async {
 
+    Session.appEvents.sharedEventParams("detail_update", json);
     final successOrFailure = await useCase.updateHouse(id, json);
 
     successOrFailure.fold(
@@ -171,6 +184,7 @@ abstract class _HouseMobx with Store {
 
   @action
   void showAlert( int id ) {
+    Session.appEvents.sharedEventParams("detail_show_alert_delete", {"id": id});
     showDialog(
       context: currentContext,
       builder: (builder) {
@@ -225,6 +239,8 @@ abstract class _HouseMobx with Store {
 
   @action
   Future<void> delete( String id ) async {
+
+    Session.appEvents.sharedEventParams("detail_delete", {"id": id});
     final successOrFailure = await useCase.deleteHouse(id);
 
     successOrFailure.fold(

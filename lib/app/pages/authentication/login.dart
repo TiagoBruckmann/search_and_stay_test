@@ -1,6 +1,9 @@
 // imports nativos
 import 'package:flutter/material.dart';
 
+// imports globais
+import 'package:search_and_stay/session.dart';
+
 // import das telas
 import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 import 'package:search_and_stay/app/core/widgets/verify_connection.dart';
@@ -21,7 +24,14 @@ class _LoginPageState extends State<LoginPage> {
   final AuthenticationMobx mobx = AuthenticationMobx();
 
   @override
+  void initState() {
+    super.initState();
+    Session.appEvents.sendScreen("login");
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     final ThemeData theme = Theme.of(context);
 
     return VerifyConnection(
