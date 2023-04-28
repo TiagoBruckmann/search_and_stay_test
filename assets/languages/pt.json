@@ -2,9 +2,13 @@
   "app_name": "Search and Stay",
   "btn_register": "Cadastrar",
   "btn_update": "Atualizar",
+  "btn_login": "Acessar",
+  "btn_cancel": "Cancelar",
+  "btn_confirm": "Confirmar",
   "pages": {
     "auth": {
       "email": "E-mail",
+      "password": "Senha",
       "register": {
         "app_bar": "Cadastro"
       },
@@ -12,23 +16,44 @@
         "app_bar": "Esqueci minha senha",
         "change": "Alterar senha",
         "delivered": "Mensagem enviada"
-      },
-      "alerts": {
-        "invalid_name": "Preencha um nome válido e tente novamente!",
-        "invalid_email": "Preencha um e-mail válido e tente novamente!",
-        "invalid_password": "Preencha uma senha válida e tente novamente!",
-        "redefinition_success": "Foi enviado um e-mail de redefinição de senha!",
-        "redefinition_failure": "Falha ao enviar o e-mail de redefinição de senha!",
-        "failure_register_profile": "Falha ao efetuar seu cadastro, tente novamente!",
-        "failure_login_profile": "Falha ao efetuar seu login, tente novamente!"
       }
     },
     "home": {
+      "home": {
+        "active": "Casa disponível",
+        "not_active":"Casa não disponível",
+        "empty_page": "Nenhuma casa encontrada",
+        "errors": {
+          "server_error": "Ocorreu um erro na sua requisição. Por favor tente novamente",
+          "cache_error": "Tivemos um problema com o seu cache. Tente novamente por favor!",
+          "general_error": "Tivemos um erro desconhecido. Tente novamente por favor!"
+        }
+      },
       "detail": {
         "register_app_bar": "Cadastrar casa",
-        "detail_app_bar": "Detalhes"
+        "detail_app_bar": "Detalhes",
+        "active": "Casa ativa?",
+        "dialog": {
+          "title": "Tem certeza que deseja deletar?",
+          "subtitle": "Você tem certeza que deseja deletar essa casa? Está ação não poderá ser desfeita!"
+        }
       }
     }
+  },
+  "alerts": {
+    "invalid_name": "Preencha um nome válido e tente novamente!",
+    "invalid_email": "Preencha um e-mail válido e tente novamente!",
+    "invalid_password": "Preencha uma senha válida e tente novamente!",
+    "redefinition_success": "Foi enviado um e-mail de redefinição de senha!",
+    "redefinition_failure": "Falha ao enviar o e-mail de redefinição de senha!",
+    "failure_register_profile": "Falha ao efetuar seu cadastro, tente novamente!",
+    "failure_login_profile": "Falha ao efetuar seu login, tente novamente!",
+    "create_success": "Casa cadastrada com sucesso!",
+    "create_failure": "Falha ao cadastrar está casa!",
+    "delete_failure": "Não foi possivel deletar está casa!",
+    "delete_success": "Casa deletada com sucesso!",
+    "update_failure": "Não foi possivel editar está casa!",
+    "update_success": "Casa atualizada com sucesso!"
   },
   "routes": {
     "app_bar": "Tela não encontrada"

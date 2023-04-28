@@ -11,7 +11,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 // gerencia de estado
-import 'package:search_and_stay/app/pages/authentication/mobx/authentication_mobx.dart';
+import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);

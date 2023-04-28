@@ -1,3 +1,6 @@
+// import das telas
+import 'package:search_and_stay/app/pages/home/cubit/home_cubit.dart';
+
 // import do domain
 import 'package:search_and_stay/domain/repositories/authentication_repo.dart';
 import 'package:search_and_stay/domain/usecases/authentication_usecase.dart';
@@ -24,6 +27,9 @@ String token = "40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8
 
 @InjectableInit()
 void configureDependencies() {
+
+  // app
+  getIt.registerFactory(() => HomeCubit(homeUseCase: getIt()));
 
   // domain
   getIt.registerFactory(() => HouseUseCase(getIt()));

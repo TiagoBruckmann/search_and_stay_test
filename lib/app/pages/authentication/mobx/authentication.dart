@@ -61,11 +61,11 @@ abstract class _AuthenticationMobx with Store {
   }
 
   @action
-  void validateFields(int type) {
+  void validateFields(bool isRegister) {
     validateEmail();
     validatePassword();
 
-    if ( type == 1 ) {
+    if ( isRegister ) {
       validateName();
       register();
       return;
@@ -78,7 +78,7 @@ abstract class _AuthenticationMobx with Store {
   void validateName() {
     String name = nameController.text;
     if ( name.trim().isEmpty || name.trim().length < 3 ) {
-      setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.invalid_name"));
+      setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_name"));
       return;
     }
   }
@@ -87,7 +87,7 @@ abstract class _AuthenticationMobx with Store {
   void validateEmail({ bool forgotPassword = false }) {
     String email = emailController.text;
     if ( email.trim().isEmpty || !email.contains("@") || ( !email.contains(".com") && !email.contains(".br") ) ) {
-      setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.invalid_email"));
+      setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_email"));
       return;
     }
     setErrorMessage("");
@@ -101,7 +101,7 @@ abstract class _AuthenticationMobx with Store {
   void validatePassword() {
     String password = passwordController.text;
     if ( password.trim().isEmpty || password.trim().length < 6 ) {
-      setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.invalid_password"));
+      setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_password"));
       return;
     }
   }
@@ -113,11 +113,11 @@ abstract class _AuthenticationMobx with Store {
     failureOrSuccess.fold(
       (failure) => {
         setSuccessMessage(false),
-        setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.redefinition_failure")),
+        setErrorMessage(FlutterI18n.translate(currentContext, "alerts.redefinition_failure")),
       },
       (success) => {
         setSuccessMessage(success),
-        setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.redefinition_success")),
+        setErrorMessage(FlutterI18n.translate(currentContext, "alerts.redefinition_success")),
       },
     );
 
@@ -135,7 +135,7 @@ abstract class _AuthenticationMobx with Store {
     final failureOrSuccess = await useCase.registerWithEmail(params);
 
     failureOrSuccess.fold(
-      (failure) => setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.failure_register_profile")),
+      (failure) => setErrorMessage(FlutterI18n.translate(currentContext, "alerts.failure_register_profile")),
       (success) => setUserEntity(success),
     );
 
@@ -152,7 +152,7 @@ abstract class _AuthenticationMobx with Store {
     final failureOrSuccess = await useCase.loginWithEmail(params);
 
     failureOrSuccess.fold(
-      (failure) => setErrorMessage(FlutterI18n.translate(currentContext, "pages.auth.alerts.failure_login_profile")),
+      (failure) => setErrorMessage(FlutterI18n.translate(currentContext, "alerts.failure_login_profile")),
       (success) => setUserEntity(success),
     );
   }

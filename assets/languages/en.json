@@ -2,9 +2,13 @@
   "app_name": "Search and Stay",
   "btn_register": "Register",
   "btn_update": "Update",
+  "btn_login": "Login",
+  "btn_cancel": "Cancel",
+  "btn_confirm": "Confirm",
   "pages": {
     "auth": {
       "email": "E-mail",
+      "password": "Password",
       "register": {
         "app_bar": "Register"
       },
@@ -12,23 +16,44 @@
         "app_bar": "Forgot my password",
         "change": "Change password",
         "delivered": "Message delivered"
-      },
-      "alerts": {
-        "invalid_name": "Enter a valid name and try again!",
-        "invalid_email": "Enter a valid email and try again!",
-        "invalid_password": "Enter a valid password and try again!",
-        "redefinition_success": "Was delivered an e-mail of password redefinition!",
-        "redefinition_failure": "Failure to send the email of password redefinition!",
-        "failure_register_profile": "Failure to effect his register, try again!",
-        "failure_login_profile": "Failure to effect his login, try again!"
       }
     },
     "home": {
+      "home": {
+        "active": "House enable",
+        "not_active":"House not enabled",
+        "empty_page": "Aren't house found",
+        "errors": {
+          "server_error": "Ups, API error. Please try again!",
+          "cache_error": "Ups, cache failed. Please try again",
+          "general_error": "Ups, something gone wrong. Please try again!"
+        }
+      },
       "detail": {
         "register_app_bar": "Register house",
-        "detail_app_bar": "Detail"
+        "detail_app_bar": "Detail",
+        "active": "Active house?",
+        "dialog": {
+          "title": "has certain that wish delete?",
+          "subtitle": "Do you have certain that wish delete this house? This action cannot be undone!"
+        }
       }
     }
+  },
+  "alerts": {
+    "invalid_name": "Enter a valid name and try again!",
+    "invalid_email": "Enter a valid email and try again!",
+    "invalid_password": "Enter a valid password and try again!",
+    "redefinition_success": "Was delivered an e-mail of password redefinition!",
+    "redefinition_failure": "Failure to send the email of password redefinition!",
+    "failure_register_profile": "Failure to effect his register, try again!",
+    "failure_login_profile": "Failure to effect his login, try again!",
+    "create_success": "House registered with successfully!",
+    "create_failure": "Failure to register this house!",
+    "delete_failure": "Isn't possible delete this house!",
+    "delete_success": "House deleted with successfully!",
+    "update_failure": "Isn't possible edit this house!",
+    "update_success": "House updated with successfully!"
   },
   "routes": {
     "app_bar": "Screen not found"

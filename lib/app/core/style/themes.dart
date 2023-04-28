@@ -108,6 +108,16 @@ class Themes {
       color: _primaryColorLight,
       size: 18,
     ),
+    dialogTheme: const DialogTheme(
+      backgroundColor: _backgroundColorLight,
+      titleTextStyle: TextStyle(
+        color: _textPrimaryLight,
+        fontSize: 20,
+      ),
+      contentTextStyle: TextStyle(
+        color: _textPrimaryLight,
+      ),
+    ),
     dividerTheme: _dividerThemeDataLight,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(8),
@@ -131,10 +141,10 @@ class Themes {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: _backgroundColorLight,
+        backgroundColor: _tertiaryColorLight,
         padding: const EdgeInsets.symmetric( horizontal: 12, vertical: 12 ),
         side: const BorderSide(
-          color: _secondaryColorLight,
+          color: _tertiaryColorLight,
           width: 3,
         ),
         shape: RoundedRectangleBorder(

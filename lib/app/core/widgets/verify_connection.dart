@@ -19,8 +19,9 @@ class VerifyConnection extends StatelessWidget {
 
   final String keyAppBar;
   final Map<String, String>? appBarParams;
+  final List<Widget>? actions;
   final Widget page;
-  const VerifyConnection({ Key? key, required this.keyAppBar, this.appBarParams, required this.page }) : super(key: key);
+  const VerifyConnection({ Key? key, required this.keyAppBar, this.appBarParams, this.actions, required this.page }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,9 @@ class VerifyConnection extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
             ),
             centerTitle: true,
+            actions: ( actions != null )
+            ? actions
+            : null,
           ),
           body: ( !Session.sharedServices.validateConnection(connectionMobx) )
           ? const LoadingConnection()

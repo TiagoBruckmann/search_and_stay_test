@@ -38,10 +38,11 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
         );
-      case "/details" :
+      case "/detail" :
         final params = args as Map;
         return MaterialPageRoute(
           builder: (builder) => DetailPage(
+            houseEntity: params["house_entity"],
             isRegister: params["is_register"],
           ),
         );
