@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         applicationId "com.searchandstay.test.search_and_stay"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -60,10 +60,15 @@ flutter {
 
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    // authentication
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+
+    // firebase
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-appcheck-playintegrity'
-    implementation 'com.google.android.gms:play-services-auth'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-perf'
 }

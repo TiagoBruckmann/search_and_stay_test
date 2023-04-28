@@ -2,7 +2,7 @@ name: search_and_stay
 description: Teste to mobile developer Search and Stay
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+6
+version: 1.0.0+8
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_secure_storage: ^8.0.0
   firebase_performance: ^0.9.1+1
   font_awesome_flutter: ^10.4.0
   firebase_crashlytics: ^3.1.1
@@ -50,8 +51,8 @@ dev_dependencies:
 
 # configuracao da splash
 flutter_native_splash:
-  color: "#363435"
-  image: assets/img/logo_splash.png
+  color: "#F5F5F5"
+  image: assets/img/logo_txt.png
   android: true
   ios: true
   fullscreen: true
