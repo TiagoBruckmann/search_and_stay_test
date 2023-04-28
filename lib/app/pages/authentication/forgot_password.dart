@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 // import das telas
 import 'package:search_and_stay/app/core/widgets/verify_connection.dart';
-import 'package:search_and_stay/app/core/style/app_colors.dart';
 import 'package:search_and_stay/app/core/style/app_images.dart';
+
+// import dos domain
+import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 
 // import dos pacotes
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-// gerencia de estado
-import 'package:search_and_stay/app/pages/authentication/mobx/authentication.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -49,7 +48,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
                   // email
                   Padding(
-                    padding: const EdgeInsets.only( top: 30, bottom: 8),
+                    padding: const EdgeInsets.only( top: 80, bottom: 8),
                     child: TextField(
                       controller: mobx.emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -73,7 +72,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           style: TextStyle(
                             color: ( !mobx.successMessage )
                             ? theme.colorScheme.error
-                            : theme.colorScheme.secondary,
+                            : theme.colorScheme.onSecondary,
                             fontSize: 17,
                           ),
                         ),
@@ -82,19 +81,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
                   // email
                   Container(
-                    padding: const EdgeInsets.symmetric( vertical: 10 ),
+                    padding: const EdgeInsets.only( top: 40 ),
                     width: MediaQuery.of(context).size.width - 130,
                     child: ElevatedButton(
-                      onPressed: ( !mobx.successMessage )
-                      ? () => mobx.validateEmail( forgotPassword: true )
-                      : null,
+                      onPressed: () {
+                        if ( !mobx.successMessage ) {
+                          mobx.validateEmail( forgotPassword: true );
+                          return;
+                        }
+                      },
                       child: Text(
                         FlutterI18n.translate(context, "pages.auth.forgot.${!mobx.successMessage ? "change": "delivered"}"),
-                        style: theme.textTheme.displayLarge!.apply(
-                          color: ( mobx.successMessage )
-                          ? AppColors.blueCharcoal
-                          : theme.colorScheme.secondary,
-                        ),
+                        style: theme.textTheme.labelSmall,
                       ),
                     ),
                   ),

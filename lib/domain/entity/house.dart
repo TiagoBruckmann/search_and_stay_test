@@ -1,7 +1,7 @@
 // import dos pacotes
 import 'package:equatable/equatable.dart';
 
-class HouseEntity {
+class HouseEntity extends Equatable  {
 
   final int id, active;
   final String name;
@@ -10,8 +10,9 @@ class HouseEntity {
   const HouseEntity( this.id, this.active, this.name, { this.order } );
 
   @override
-  List<Object?> get props => [id, active, name, order];
+  String toString() => name;
 
   @override
-  String toString() => name;
+  List<Object?> get props => [id, active, name, order];
+
 }

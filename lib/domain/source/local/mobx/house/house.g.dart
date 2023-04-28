@@ -9,6 +9,22 @@ part of 'house.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HouseMobx on _HouseMobx, Store {
+  late final _$isLoadingAtom =
+      Atom(name: '_HouseMobx.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$useCaseAtom = Atom(name: '_HouseMobx.useCase', context: context);
 
   @override
@@ -21,6 +37,22 @@ mixin _$HouseMobx on _HouseMobx, Store {
   set useCase(HouseUseCase value) {
     _$useCaseAtom.reportWrite(value, super.useCase, () {
       super.useCase = value;
+    });
+  }
+
+  late final _$controllerScrollAtom =
+      Atom(name: '_HouseMobx.controllerScroll', context: context);
+
+  @override
+  ScrollController? get controllerScroll {
+    _$controllerScrollAtom.reportRead();
+    return super.controllerScroll;
+  }
+
+  @override
+  set controllerScroll(ScrollController? value) {
+    _$controllerScrollAtom.reportWrite(value, super.controllerScroll, () {
+      super.controllerScroll = value;
     });
   }
 
@@ -72,6 +104,30 @@ mixin _$HouseMobx on _HouseMobx, Store {
     });
   }
 
+  late final _$getHousesAsyncAction =
+      AsyncAction('_HouseMobx.getHouses', context: context);
+
+  @override
+  Future<void> getHouses() {
+    return _$getHousesAsyncAction.run(() => super.getHouses());
+  }
+
+  late final _$loadMoreAsyncAction =
+      AsyncAction('_HouseMobx.loadMore', context: context);
+
+  @override
+  Future<void> loadMore() {
+    return _$loadMoreAsyncAction.run(() => super.loadMore());
+  }
+
+  late final _$refreshAsyncAction =
+      AsyncAction('_HouseMobx.refresh', context: context);
+
+  @override
+  Future<void> refresh() {
+    return _$refreshAsyncAction.run(() => super.refresh());
+  }
+
   late final _$createAsyncAction =
       AsyncAction('_HouseMobx.create', context: context);
 
@@ -100,11 +156,66 @@ mixin _$HouseMobx on _HouseMobx, Store {
       ActionController(name: '_HouseMobx', context: context);
 
   @override
-  void setActive() {
+  void setIsLoading(bool value) {
+    final _$actionInfo = _$_HouseMobxActionController.startAction(
+        name: '_HouseMobx.setIsLoading');
+    try {
+      return super.setIsLoading(value);
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addToList(Iterable<HouseEntity> entities) {
+    final _$actionInfo =
+        _$_HouseMobxActionController.startAction(name: '_HouseMobx.addToList');
+    try {
+      return super.addToList(entities);
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clear() {
+    final _$actionInfo =
+        _$_HouseMobxActionController.startAction(name: '_HouseMobx.clear');
+    try {
+      return super.clear();
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void goToDetail(HouseEntity? houseEntity, bool isRegister) {
+    final _$actionInfo =
+        _$_HouseMobxActionController.startAction(name: '_HouseMobx.goToDetail');
+    try {
+      return super.goToDetail(houseEntity, isRegister);
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setValues(HouseEntity entity) {
+    final _$actionInfo =
+        _$_HouseMobxActionController.startAction(name: '_HouseMobx.setValues');
+    try {
+      return super.setValues(entity);
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setActive(bool value) {
     final _$actionInfo =
         _$_HouseMobxActionController.startAction(name: '_HouseMobx.setActive');
     try {
-      return super.setActive();
+      return super.setActive(value);
     } finally {
       _$_HouseMobxActionController.endAction(_$actionInfo);
     }
@@ -157,7 +268,9 @@ mixin _$HouseMobx on _HouseMobx, Store {
   @override
   String toString() {
     return '''
+isLoading: ${isLoading},
 useCase: ${useCase},
+controllerScroll: ${controllerScroll},
 nameController: ${nameController},
 isActive: ${isActive},
 messageError: ${messageError}

@@ -26,7 +26,7 @@ class HouseUseCase {
     return houseRepo.updateHouse(id, json);
   }
 
-  Future<Either<Failure, HouseEntity>> deleteHouse( String id ) {
+  Future<Either<Failure, bool>> deleteHouse( String id ) {
     return houseRepo.deleteHouse(id);
   }
 }

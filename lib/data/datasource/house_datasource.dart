@@ -18,7 +18,7 @@ abstract class HouseRemoteDatasource {
   Future<HouseModel> getDetail( String id );
   Future<HouseModel> createHouse( Map<String, dynamic> json );
   Future<HouseModel> updateHouse( String id, Map<String, dynamic> json );
-  Future<HouseModel> deleteHouse( String id );
+  Future<bool> deleteHouse( String id );
 
 }
 
@@ -29,7 +29,12 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
   @override
   Future<List<HouseModel>> getHouses() async {
 
-    final Uri url = Uri.https(apiUrl, pathUrl);
+    String page = currentPage.toString();
+    if ( nextPage != null ) {
+      page = nextPage.toString();
+    }
+
+    final Uri url = Uri.https(apiUrl, pathUrl, {"page": page});
     final header = await DefaultCommunication.defaultHeader;
     final response = await client.get(
       url,
@@ -45,9 +50,9 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
 
     if ( body["success"] == true ) {
       for ( final data in body["data"]["entities"] ) {
-        print("data => $data");
         listHouse.add(HouseModel.fromJson(data));
       }
+      paginationSettings(body["data"]["pagination"]);
     }
 
     return listHouse;
@@ -86,7 +91,7 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
     final response = await client.post(
       url,
       headers: header,
-      body: json,
+      body: jsonEncode(json),
     );
 
     if ( response.statusCode != 200 ) {
@@ -110,7 +115,7 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
     final response = await client.put(
       url,
       headers: header,
-      body: json,
+      body: jsonEncode(json),
     );
 
     if ( response.statusCode != 200 ) {
@@ -127,7 +132,7 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
   }
 
   @override
-  Future<HouseModel> deleteHouse( String id ) async {
+  Future<bool> deleteHouse( String id ) async {
 
     final header = await DefaultCommunication.defaultHeader;
     final Uri url = Uri.https(apiUrl, "$pathUrl/$id");
@@ -146,7 +151,6 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
       throw ServerExceptions();
     }
 
-    HouseModel houseModel = HouseModel.fromJson(body["data"]);
-    return houseModel;
+    return body["success"];
   }
 }

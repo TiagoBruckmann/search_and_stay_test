@@ -63,7 +63,7 @@ class HouseRepoImpl implements HouseRepo {
   }
 
   @override
-  Future<Either<Failure, HouseModel>> deleteHouse( String id ) async {
+  Future<Either<Failure, bool>> deleteHouse( String id ) async {
     try {
       final result = await houseRemoteDatasource.deleteHouse(id);
       return right(result);

@@ -62,4 +62,15 @@ class AuthenticationRepoImpl implements AuthenticationRepo {
     }
   }
 
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      return right(await authenticationRemoteDatasource.logOut());
+    } on ServerExceptions {
+      return left(ServerFailure());
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
 }

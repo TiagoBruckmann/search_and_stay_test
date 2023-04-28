@@ -33,7 +33,7 @@ class Themes {
 
   static const TextStyle _displayLargeTextLight = TextStyle(
     fontWeight: FontWeight.w600,
-    color: _backgroundColorLight,
+    color: _textPrimaryLight,
     fontSize: 20,
   );
 
@@ -48,7 +48,7 @@ class Themes {
     fontSize: 17,
   );
 
-  static const TextStyle _defaultTextLight = TextStyle(
+  static const TextStyle _bodyMediumTextLight = TextStyle(
     color: _textPrimaryLight,
   );
 
@@ -58,8 +58,9 @@ class Themes {
   );
 
   static const TextStyle _labelSmallTextLight = TextStyle(
-    color: _tertiaryColorLight,
-    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: _backgroundColorLight,
+    fontSize: 17,
   );
 
   static const TextTheme _textThemeLight = TextTheme(
@@ -67,7 +68,7 @@ class Themes {
     displayLarge: _displayLargeTextLight,
     displayMedium: _displayMediumTextLight,
     displaySmall: _displaySmallTextLight,
-    bodyMedium: _defaultTextLight,
+    bodyMedium: _bodyMediumTextLight,
     labelMedium: _labelMediumTextLight,
     labelSmall: _labelSmallTextLight,
   );
@@ -122,7 +123,7 @@ class Themes {
     dividerTheme: _dividerThemeDataLight,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(8),
-      labelStyle: _defaultTextLight,
+      labelStyle: _bodyMediumTextLight,
       filled: true,
       fillColor: Colors.transparent,
       enabledBorder: const OutlineInputBorder(

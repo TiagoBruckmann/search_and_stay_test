@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 // imports globais
 import 'package:search_and_stay/session.dart';
 
+// import das telas
+import 'package:search_and_stay/app/core/widgets/custom_snack_bar.dart';
+import 'package:search_and_stay/app/core/style/app_colors.dart';
+
 // import domain
 import 'package:search_and_stay/domain/source/local/injection/injection.dart';
-import 'package:search_and_stay/app/core/widgets/custom_snack_bar.dart';
 import 'package:search_and_stay/domain/usecases/house_usecase.dart';
-import 'package:search_and_stay/app/core/style/app_colors.dart';
+import 'package:search_and_stay/domain/entity/house.dart';
 
 // import dos pacotes
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -22,8 +25,16 @@ abstract class _HouseMobx with Store {
 
   BuildContext currentContext = Session.globalContext.currentContext!;
 
+  ObservableList<HouseEntity> listHouses = ObservableList();
+
+  @observable
+  bool isLoading = true;
+
   @observable
   HouseUseCase useCase = HouseUseCase(getIt());
+
+  @observable
+  ScrollController? controllerScroll;
 
   @observable
   TextEditingController nameController = TextEditingController();
@@ -35,7 +46,74 @@ abstract class _HouseMobx with Store {
   String messageError = "";
 
   @action
-  void setActive() => isActive = !isActive;
+  void setIsLoading( bool value ) => isLoading = value;
+
+  @action
+  Future<void> getHouses() async {
+
+    final failureOrList = await useCase.getHouses();
+
+    failureOrList.fold(
+      (failure) => [],
+      (success) => addToList(success),
+    );
+  }
+
+  @action
+  void addToList( Iterable<HouseEntity> entities ) {
+    setIsLoading(false);
+    listHouses.addAll(entities);
+  }
+
+  @action
+  Future<void> loadMore() async {
+    if ( nextPage != null && lastPage > 1 ) {
+      Session.appEvents.sharedEvent("home_load_more");
+
+      if ( controllerScroll!.position.extentAfter < scrollSize && listHouses.length < totalItems ) {
+        scrollSize -= 57;
+        await getHouses();
+      }
+    }
+  }
+
+  @action
+  Future<void> refresh() async {
+    clear();
+    await getHouses();
+  }
+
+  @action
+  void clear() {
+    setIsLoading(true);
+    listHouses.clear();
+    clearPagination();
+    setErrorMessage("");
+    nameController = TextEditingController(text: "");
+  }
+
+  @action
+  void goToDetail( HouseEntity? houseEntity, bool isRegister ) {
+    Navigator.pushNamed(
+      Session.globalContext.currentContext!,
+      "/detail",
+      arguments: {
+        "house_entity": houseEntity,
+        "is_register": isRegister,
+      },
+    );
+  }
+
+  @action
+  void setValues( HouseEntity entity ) {
+    if ( nameController.text.trim().isEmpty ) {
+      nameController = TextEditingController(text: entity.name);
+      setActive( entity.active == 1 ? true : false );
+    }
+  }
+
+  @action
+  void setActive( bool value ) => isActive = value;
 
   @action
   void setErrorMessage(String value) => messageError = value;
@@ -49,8 +127,10 @@ abstract class _HouseMobx with Store {
     }
 
     Map<String, dynamic> map = {
-      "name": nameController.text,
-      "active": isActive,
+      "house_rules": {
+        "name": nameController.text,
+        "active": isActive ? 1 : 0,
+      }
     };
 
     if ( isRegister ) {
@@ -69,7 +149,7 @@ abstract class _HouseMobx with Store {
     successOrFailure.fold(
       (failure) => CustomSnackBar(messageKey: "alerts.create_failure"),
       (success) => {
-        CustomSnackBar(messageKey: "alerts.create_success"),
+        CustomSnackBar(messageKey: "alerts.create_success", color: AppColors.chateauGreen),
         Navigator.pop(currentContext),
       },
     );
@@ -83,7 +163,7 @@ abstract class _HouseMobx with Store {
     successOrFailure.fold(
       (failure) => CustomSnackBar(messageKey: "alerts.update_failure"),
       (success) => {
-        CustomSnackBar(messageKey: "alerts.update_success"),
+        CustomSnackBar(messageKey: "alerts.update_success", color: AppColors.chateauGreen),
         Navigator.pop(currentContext),
       },
     );
@@ -104,21 +184,21 @@ abstract class _HouseMobx with Store {
     return Center(
       child: AlertDialog(
         title: Text(
-          FlutterI18n.translate(currentContext, "pages.detail.dialog.title"),
+          FlutterI18n.translate(currentContext, "pages.home.detail.dialog.title"),
           textAlign: TextAlign.center,
         ),
         content: Text(
-          FlutterI18n.translate(currentContext, "pages.detail.dialog.subtitle"),
+          FlutterI18n.translate(currentContext, "pages.home.detail.dialog.subtitle"),
           textAlign: TextAlign.center,
         ),
         contentPadding: const EdgeInsets.all(16),
         actions: [
 
           TextButton(
-            child: const Text(
-              "btn_cancel",
+            child: Text(
+              FlutterI18n.translate(currentContext, "btn_cancel"),
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.red,
               ),
             ),
@@ -126,9 +206,9 @@ abstract class _HouseMobx with Store {
           ),
 
           TextButton(
-            child: const Text(
-              "btn_confirm",
-              style: TextStyle(
+            child: Text(
+              FlutterI18n.translate(currentContext, "btn_confirm"),
+              style: const TextStyle(
                 color: AppColors.orangeRed,
               ),
             ),
@@ -150,10 +230,9 @@ abstract class _HouseMobx with Store {
     successOrFailure.fold(
       (failure) => CustomSnackBar(messageKey: "alerts.delete_failure"),
       (success) => {
-        CustomSnackBar(messageKey: "alerts.delete_success"),
+        CustomSnackBar(messageKey: "alerts.delete_success", color: AppColors.chateauGreen),
         Navigator.pop(currentContext),
       },
     );
-
   }
 }

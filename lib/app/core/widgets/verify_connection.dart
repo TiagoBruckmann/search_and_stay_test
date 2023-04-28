@@ -11,6 +11,7 @@ import 'package:search_and_stay/app/core/widgets/loading_connection.dart';
 import 'package:search_and_stay/domain/source/local/mobx/connection/connection.dart';
 
 // import dos pacotes
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,8 @@ class VerifyConnection extends StatelessWidget {
   final Map<String, String>? appBarParams;
   final List<Widget>? actions;
   final Widget page;
-  const VerifyConnection({ Key? key, required this.keyAppBar, this.appBarParams, this.actions, required this.page }) : super(key: key);
+  final Function? function;
+  const VerifyConnection({ Key? key, required this.keyAppBar, this.appBarParams, this.actions, required this.page, this.function }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,20 @@ class VerifyConnection extends StatelessWidget {
           body: ( !Session.sharedServices.validateConnection(connectionMobx) )
           ? const LoadingConnection()
           : page,
+          floatingActionButton: ( function == null )
+          ? null
+          : FloatingActionButton(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular( 14 ),
+            ),
+            onPressed: () => function!.call(),
+            child: FaIcon(
+              FontAwesomeIcons.plus,
+              color: theme.colorScheme.background,
+              size: 18,
+            ),
+          ),
         );
 
       },

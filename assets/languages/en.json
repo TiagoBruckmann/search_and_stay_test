@@ -22,25 +22,24 @@
     },
     "home": {
       "home": {
-        "app_bar": "Houses",
+        "app_bar": "Dwellings",
         "active": "House enable",
         "not_active":"House not enabled",
-        "empty_page": "Aren't house found",
-        "errors": {
-          "server_error": "Ups, API error. Please try again!",
-          "cache_error": "Ups, cache failed. Please try again",
-          "general_error": "Ups, something gone wrong. Please try again!"
-        }
+        "empty_page": "Aren't dwellings found",
+        "logOut": "LogOut"
       },
       "detail": {
-        "register_app_bar": "Register house",
+        "register_app_bar": "Register dwellings",
         "detail_app_bar": "Detail",
-        "active": "Active house?",
+        "active": "Active dwellings?",
         "dialog": {
           "title": "has certain that wish delete?",
-          "subtitle": "Do you have certain that wish delete this house? This action cannot be undone!"
+          "subtitle": "Do you have certain that wish delete this dwellings? This action cannot be undone!"
         }
       }
+    },
+    "connection": {
+      "title": "Verify your connection with the ethernet, to continue using the app."
     }
   },
   "alerts": {
@@ -52,11 +51,12 @@
     "failure_register_profile": "Failure to effect his register, try again!",
     "failure_login_profile": "Failure to effect his login, try again!",
     "create_success": "House registered with successfully!",
-    "create_failure": "Failure to register this house!",
-    "delete_failure": "Isn't possible delete this house!",
+    "create_failure": "Failure to register this dwellings!",
+    "delete_failure": "Isn't possible delete this dwellings!",
     "delete_success": "House deleted with successfully!",
-    "update_failure": "Isn't possible edit this house!",
-    "update_success": "House updated with successfully!"
+    "update_failure": "Isn't possible edit this dwellings!",
+    "update_success": "House updated with successfully!",
+    "failure_logout": "Failure to logOut, try again!"
   },
   "routes": {
     "app_bar": "Screen not found"

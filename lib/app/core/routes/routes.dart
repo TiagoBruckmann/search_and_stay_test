@@ -1,5 +1,6 @@
 // imports nativos do flutter
 import 'package:flutter/material.dart';
+import 'package:search_and_stay/app/pages/authentication/forgot_password.dart';
 import 'package:search_and_stay/app/pages/authentication/login.dart';
 import 'package:search_and_stay/app/pages/authentication/register.dart';
 import 'package:search_and_stay/app/pages/home/detail.dart';
@@ -32,7 +33,7 @@ class Routes {
         );
       case "/forgot_password" :
         return MaterialPageRoute(
-          builder: (_) => const RegisterPage(),
+          builder: (_) => const ForgotPasswordPage(),
         );
       case "/" :
         return MaterialPageRoute(

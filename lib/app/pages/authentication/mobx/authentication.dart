@@ -158,10 +158,31 @@ abstract class _AuthenticationMobx with Store {
   }
 
   @action
+  Future<void> logOut() async {
+    final failureOrSuccess = await useCase.logOut();
+
+    failureOrSuccess.fold(
+      (failure) => setErrorMessage(FlutterI18n.translate(currentContext, "alerts.failure_logout")),
+      (success) => goToLogin(),
+    );
+
+  }
+
+  @action
+  void goToLogin() {
+    Session.localStorage.deleteAllCredentials();
+    Navigator.pushNamedAndRemoveUntil(
+      currentContext,
+      "/login",
+      (route) => false,
+    );
+  }
+
+  @action
   void goToForgot() {
     Navigator.pushNamed(
       currentContext,
-      "/forgot",
+      "/forgot_password",
     );
   }
 

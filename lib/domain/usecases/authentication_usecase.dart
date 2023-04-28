@@ -26,4 +26,8 @@ class AuthenticationUseCase {
     return authenticationRepo.forgotPassword(email);
   }
 
+  Future<Either<Failure, void>> logOut() async {
+    return authenticationRepo.logOut();
+  }
+
 }

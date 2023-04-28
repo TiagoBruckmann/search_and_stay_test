@@ -14,6 +14,8 @@ class LoadingHouses extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (BuildContext context, index) {
         return Card(
+          margin: const EdgeInsets.symmetric( horizontal: 16, vertical: 5 ),
+          elevation: 2,
           child: ListTile(
             leading: Shimmer(
               duration: const Duration(seconds: 5),
@@ -21,8 +23,9 @@ class LoadingHouses extends StatelessWidget {
               colorOpacity: 0.3,
               enabled: true,
               direction: const ShimmerDirection.fromLTRB(),
-              child: const FaIcon(
+              child: FaIcon(
                 FontAwesomeIcons.houseChimney,
+                color: Theme.of(context).colorScheme.onSecondary,
                 size: 20,
               ),
             ),

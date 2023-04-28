@@ -10,4 +10,5 @@ abstract class AuthenticationRepo {
   Future<Either<Failure, UserEntity>> registerWithEmail( Map<String, dynamic> params );
   Future<Either<Failure, UserEntity>> loginWithEmail( Map<String, dynamic> params );
   Future<Either<Failure, bool>> forgotPassword( String email );
+  Future<Either<Failure, void>> logOut();
 }

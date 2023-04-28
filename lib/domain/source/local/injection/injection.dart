@@ -1,6 +1,3 @@
-// import das telas
-import 'package:search_and_stay/app/pages/home/cubit/home_cubit.dart';
-
 // import do domain
 import 'package:search_and_stay/domain/repositories/authentication_repo.dart';
 import 'package:search_and_stay/domain/usecases/authentication_usecase.dart';
@@ -23,13 +20,16 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.I;
 
 String apiUrl = "sys-dev.searchandstay.com";
-String pathUrl = "api/admin/house_rules/";
+String pathUrl = "api/admin/house_rules";
+
+int totalItems = 0;
+int scrollSize = 170;
+int currentPage = 1;
+int? nextPage;
+int lastPage = 1;
 
 @InjectableInit()
 void configureDependencies() {
-
-  // app
-  getIt.registerFactory(() => HomeCubit(homeUseCase: getIt()));
 
   // domain
   getIt.registerFactory(() => HouseUseCase(getIt()));
@@ -46,4 +46,21 @@ void configureDependencies() {
   getIt.registerFactory(() => FirebaseAuth.instance);
   getIt.registerFactory(() => http.Client());
 
+}
+
+Future<void> paginationSettings(Map<String, dynamic> json) async {
+  totalItems = json["total"];
+  currentPage = json["current_page"];
+  if ( json["links"]["next"] != null ) {
+    nextPage = int.parse(json["links"]["next"].toString().split("page=")[1]);
+  }
+  lastPage = json["total_pages"];
+}
+
+void clearPagination() {
+  totalItems = 0;
+  scrollSize = 170;
+  currentPage = 1;
+  nextPage = null;
+  lastPage = 1;
 }

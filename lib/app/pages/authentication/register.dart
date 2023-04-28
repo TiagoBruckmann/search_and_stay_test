@@ -126,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () => mobx.validateEmail(),
                       child: Text(
                         FlutterI18n.translate(context, "btn_register"),
-                        style: theme.textTheme.displayLarge,
+                        style: theme.textTheme.labelSmall,
                       ),
                     ),
                   ),

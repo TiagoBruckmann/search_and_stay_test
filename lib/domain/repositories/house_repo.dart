@@ -10,5 +10,5 @@ abstract class HouseRepo {
   Future<Either<Failure, HouseEntity>> getDetail( String id );
   Future<Either<Failure, HouseEntity>> createHouse( Map<String, dynamic> json );
   Future<Either<Failure, HouseEntity>> updateHouse( String id, Map<String, dynamic> json );
-  Future<Either<Failure, HouseEntity>> deleteHouse( String id );
+  Future<Either<Failure, bool>> deleteHouse( String id );
 }

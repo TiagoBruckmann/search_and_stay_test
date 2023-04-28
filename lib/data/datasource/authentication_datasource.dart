@@ -15,6 +15,7 @@ abstract class AuthenticationRemoteDatasource {
   Future<UserModel> registerWithEmail( Map<String, dynamic> params );
   Future<UserModel> loginWithEmail( Map<String, dynamic> params );
   Future<bool> forgotPassword( String email );
+  Future<void> logOut();
 
 }
 
@@ -30,6 +31,7 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteDatasource {
 
     User? user = auth.currentUser;
     if ( user != null ) {
+      await getToken();
       connected = true;
     }
 
@@ -125,6 +127,22 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteDatasource {
     return success;
   }
 
+  @override
+  Future<void> logOut() async {
+
+    try {
+
+      await auth.signOut()
+        .then((value) => value)
+        .catchError((onError) {
+          Session.crash.log(onError);
+          throw ServerExceptions();
+        });
+    } on Exception {
+      throw ServerExceptions();
+    }
+
+  }
 
   Future<void> getToken() async {
     await db.collection("credentials")
@@ -134,6 +152,15 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteDatasource {
           String token = value.data()!["token"];
           Session.localStorage.setCredential("token", token);
         },
-      );
+      )
+      .onError((error, stackTrace) {
+        Session.crash.onError(error, stackTrace);
+        throw ServerExceptions();
+      })
+      .catchError((onError) {
+        Session.crash.log(onError);
+        throw ServerExceptions();
+      });
   }
+
 }

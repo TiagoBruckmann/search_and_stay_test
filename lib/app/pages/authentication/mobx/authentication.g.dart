@@ -177,6 +177,14 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
     return _$loginAsyncAction.run(() => super.login());
   }
 
+  late final _$logOutAsyncAction =
+      AsyncAction('_AuthenticationMobx.logOut', context: context);
+
+  @override
+  Future<void> logOut() {
+    return _$logOutAsyncAction.run(() => super.logOut());
+  }
+
   late final _$_AuthenticationMobxActionController =
       ActionController(name: '_AuthenticationMobx', context: context);
 
@@ -263,6 +271,17 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
         name: '_AuthenticationMobx.validateName');
     try {
       return super.validateName();
+    } finally {
+      _$_AuthenticationMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void goToLogin() {
+    final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
+        name: '_AuthenticationMobx.goToLogin');
+    try {
+      return super.goToLogin();
     } finally {
       _$_AuthenticationMobxActionController.endAction(_$actionInfo);
     }

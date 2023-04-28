@@ -22,25 +22,24 @@
     },
     "home": {
       "home": {
-        "app_bar": "Casas",
-        "active": "Casa disponível",
-        "not_active":"Casa não disponível",
-        "empty_page": "Nenhuma casa encontrada",
-        "errors": {
-          "server_error": "Ocorreu um erro na sua requisição. Por favor tente novamente",
-          "cache_error": "Tivemos um problema com o seu cache. Tente novamente por favor!",
-          "general_error": "Tivemos um erro desconhecido. Tente novamente por favor!"
-        }
+        "app_bar": "Moradias",
+        "active": "Moradia disponível",
+        "not_active":"Moradia não disponível",
+        "empty_page": "Nenhuma moradia encontrada",
+        "logOut": "Desconectar"
       },
       "detail": {
-        "register_app_bar": "Cadastrar casa",
+        "register_app_bar": "Cadastrar moradia",
         "detail_app_bar": "Detalhes",
-        "active": "Casa ativa?",
+        "active": "Moradia ativa?",
         "dialog": {
           "title": "Tem certeza que deseja deletar?",
-          "subtitle": "Você tem certeza que deseja deletar essa casa? Está ação não poderá ser desfeita!"
+          "subtitle": "Você tem certeza que deseja deletar essa moradia? Está ação não poderá ser desfeita!"
         }
       }
+    },
+    "connection": {
+      "title": "Verifique sua conexão com a internet, para continuar utilizando o app."
     }
   },
   "alerts": {
@@ -52,11 +51,12 @@
     "failure_register_profile": "Falha ao efetuar seu cadastro, tente novamente!",
     "failure_login_profile": "Falha ao efetuar seu login, tente novamente!",
     "create_success": "Casa cadastrada com sucesso!",
-    "create_failure": "Falha ao cadastrar está casa!",
-    "delete_failure": "Não foi possivel deletar está casa!",
+    "create_failure": "Falha ao cadastrar está moradia!",
+    "delete_failure": "Não foi possivel deletar está moradia!",
     "delete_success": "Casa deletada com sucesso!",
-    "update_failure": "Não foi possivel editar está casa!",
-    "update_success": "Casa atualizada com sucesso!"
+    "update_failure": "Não foi possivel editar está moradia!",
+    "update_success": "Casa atualizada com sucesso!",
+    "failure_logout": "Falha ao desconectar, tente novamente!"
   },
   "routes": {
     "app_bar": "Tela não encontrada"

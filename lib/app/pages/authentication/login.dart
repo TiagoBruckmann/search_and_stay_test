@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () => mobx.validateEmail(),
                       child: Text(
                         FlutterI18n.translate(context, "btn_login"),
-                        style: theme.textTheme.displayLarge,
+                        style: theme.textTheme.labelSmall,
                       ),
                     ),
                   ),
