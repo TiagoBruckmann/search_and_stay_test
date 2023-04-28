@@ -22,8 +22,8 @@ class HouseUseCase {
     return houseRepo.createHouse(json);
   }
 
-  Future<Either<Failure, HouseEntity>> updateHouse( Map<String, dynamic> json ) {
-    return houseRepo.updateHouse(json);
+  Future<Either<Failure, HouseEntity>> updateHouse( String id, Map<String, dynamic> json ) {
+    return houseRepo.updateHouse(id, json);
   }
 
   Future<Either<Failure, HouseEntity>> deleteHouse( String id ) {

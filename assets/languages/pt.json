@@ -7,8 +7,10 @@
   "btn_confirm": "Confirmar",
   "pages": {
     "auth": {
+      "name": "Nome",
       "email": "E-mail",
       "password": "Senha",
+      "create_account": "Cadastre-se!",
       "register": {
         "app_bar": "Cadastro"
       },
@@ -20,6 +22,7 @@
     },
     "home": {
       "home": {
+        "app_bar": "Casas",
         "active": "Casa disponível",
         "not_active":"Casa não disponível",
         "empty_page": "Nenhuma casa encontrada",

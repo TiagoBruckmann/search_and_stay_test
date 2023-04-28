@@ -121,17 +121,33 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
     });
   }
 
+  late final _$isRegisterAtom =
+      Atom(name: '_AuthenticationMobx.isRegister', context: context);
+
+  @override
+  bool get isRegister {
+    _$isRegisterAtom.reportRead();
+    return super.isRegister;
+  }
+
+  @override
+  set isRegister(bool value) {
+    _$isRegisterAtom.reportWrite(value, super.isRegister, () {
+      super.isRegister = value;
+    });
+  }
+
   late final _$userEntityAtom =
       Atom(name: '_AuthenticationMobx.userEntity', context: context);
 
   @override
-  UserEntity get userEntity {
+  UserEntity? get userEntity {
     _$userEntityAtom.reportRead();
     return super.userEntity;
   }
 
   @override
-  set userEntity(UserEntity value) {
+  set userEntity(UserEntity? value) {
     _$userEntityAtom.reportWrite(value, super.userEntity, () {
       super.userEntity = value;
     });
@@ -176,6 +192,17 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
   }
 
   @override
+  dynamic setIsRegister() {
+    final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
+        name: '_AuthenticationMobx.setIsRegister');
+    try {
+      return super.setIsRegister();
+    } finally {
+      _$_AuthenticationMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setErrorMessage(String value) {
     final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
         name: '_AuthenticationMobx.setErrorMessage');
@@ -209,28 +236,6 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
   }
 
   @override
-  void validateFields(bool isRegister) {
-    final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
-        name: '_AuthenticationMobx.validateFields');
-    try {
-      return super.validateFields(isRegister);
-    } finally {
-      _$_AuthenticationMobxActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void validateName() {
-    final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
-        name: '_AuthenticationMobx.validateName');
-    try {
-      return super.validateName();
-    } finally {
-      _$_AuthenticationMobxActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validateEmail({bool forgotPassword = false}) {
     final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
         name: '_AuthenticationMobx.validateEmail');
@@ -253,6 +258,17 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
   }
 
   @override
+  void validateName() {
+    final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
+        name: '_AuthenticationMobx.validateName');
+    try {
+      return super.validateName();
+    } finally {
+      _$_AuthenticationMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void goToForgot() {
     final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
         name: '_AuthenticationMobx.goToForgot');
@@ -264,11 +280,11 @@ mixin _$AuthenticationMobx on _AuthenticationMobx, Store {
   }
 
   @override
-  void goToRegister(int type) {
+  void goToRegister() {
     final _$actionInfo = _$_AuthenticationMobxActionController.startAction(
         name: '_AuthenticationMobx.goToRegister');
     try {
-      return super.goToRegister(type);
+      return super.goToRegister();
     } finally {
       _$_AuthenticationMobxActionController.endAction(_$actionInfo);
     }
@@ -295,6 +311,7 @@ nameController: ${nameController},
 hidePassword: ${hidePassword},
 errorMessage: ${errorMessage},
 successMessage: ${successMessage},
+isRegister: ${isRegister},
 userEntity: ${userEntity}
     ''';
   }

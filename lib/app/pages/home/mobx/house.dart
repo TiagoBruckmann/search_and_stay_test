@@ -41,7 +41,7 @@ abstract class _HouseMobx with Store {
   void setErrorMessage(String value) => messageError = value;
 
   @action
-  void validateName( bool isRegister ) {
+  void validateName( bool isRegister, int? id ) {
     String name = nameController.text;
     if ( name.trim().isEmpty || name.length < 3 ) {
       setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_name"));
@@ -58,7 +58,7 @@ abstract class _HouseMobx with Store {
       return;
     }
 
-    update(map);
+    update(id!.toString(), map);
   }
 
   @action
@@ -76,9 +76,9 @@ abstract class _HouseMobx with Store {
   }
 
   @action
-  Future<void> update(Map<String, dynamic> json) async {
+  Future<void> update(String id, Map<String, dynamic> json) async {
 
-    final successOrFailure = await useCase.updateHouse(json);
+    final successOrFailure = await useCase.updateHouse(id, json);
 
     successOrFailure.fold(
       (failure) => CustomSnackBar(messageKey: "alerts.update_failure"),
@@ -90,7 +90,17 @@ abstract class _HouseMobx with Store {
   }
 
   @action
-  Widget validateDelete( int id ) {
+  void showAlert( int id ) {
+    showDialog(
+      context: currentContext,
+      builder: (builder) {
+        return validateDelete(id.toString());
+      },
+    );
+  }
+
+  @action
+  Widget validateDelete( String id ) {
     return Center(
       child: AlertDialog(
         title: Text(
@@ -124,7 +134,7 @@ abstract class _HouseMobx with Store {
             ),
             onPressed: () {
               Navigator.pop( currentContext );
-              delete(id.toString());
+              delete(id);
             },
           ),
 

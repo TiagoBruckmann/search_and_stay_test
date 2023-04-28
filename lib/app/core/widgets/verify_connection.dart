@@ -39,7 +39,7 @@ class VerifyConnection extends StatelessWidget {
           : AppBar(
             title: Text(
               FlutterI18n.translate(context, keyAppBar, translationParams: appBarParams),
-              style: theme.textTheme.bodyMedium,
+              style: theme.textTheme.labelMedium,
             ),
             centerTitle: true,
             actions: ( actions != null )

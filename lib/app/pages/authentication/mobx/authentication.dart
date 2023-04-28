@@ -43,10 +43,16 @@ abstract class _AuthenticationMobx with Store {
   bool successMessage = false;
 
   @observable
-  late UserEntity userEntity;
+  bool isRegister = false;
+
+  @observable
+  UserEntity? userEntity;
 
   @action
   void updHidePassword() => hidePassword = !hidePassword;
+
+  @action
+  setIsRegister() => isRegister = true;
 
   @action
   setErrorMessage(String value) => errorMessage = value;
@@ -61,29 +67,6 @@ abstract class _AuthenticationMobx with Store {
   }
 
   @action
-  void validateFields(bool isRegister) {
-    validateEmail();
-    validatePassword();
-
-    if ( isRegister ) {
-      validateName();
-      register();
-      return;
-    }
-
-    login();
-  }
-
-  @action
-  void validateName() {
-    String name = nameController.text;
-    if ( name.trim().isEmpty || name.trim().length < 3 ) {
-      setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_name"));
-      return;
-    }
-  }
-
-  @action
   void validateEmail({ bool forgotPassword = false }) {
     String email = emailController.text;
     if ( email.trim().isEmpty || !email.contains("@") || ( !email.contains(".com") && !email.contains(".br") ) ) {
@@ -95,6 +78,7 @@ abstract class _AuthenticationMobx with Store {
       sendCodeToEmail();
       return;
     }
+    validatePassword();
   }
 
   @action
@@ -104,6 +88,22 @@ abstract class _AuthenticationMobx with Store {
       setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_password"));
       return;
     }
+    if ( !isRegister ) {
+      login();
+      return;
+    }
+
+    validateName();
+  }
+
+  @action
+  void validateName() {
+    String name = nameController.text;
+    if ( name.trim().isEmpty || name.trim().length < 3 ) {
+      setErrorMessage(FlutterI18n.translate(currentContext, "alerts.invalid_name"));
+      return;
+    }
+    register();
   }
 
   @action
@@ -166,7 +166,7 @@ abstract class _AuthenticationMobx with Store {
   }
 
   @action
-  void goToRegister(int type) {
+  void goToRegister() {
     Navigator.pushNamed(
       currentContext,
       "/register",

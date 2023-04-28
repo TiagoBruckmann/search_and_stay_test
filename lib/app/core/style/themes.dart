@@ -33,7 +33,7 @@ class Themes {
 
   static const TextStyle _displayLargeTextLight = TextStyle(
     fontWeight: FontWeight.w600,
-    color: _textPrimaryLight,
+    color: _backgroundColorLight,
     fontSize: 20,
   );
 
@@ -53,8 +53,8 @@ class Themes {
   );
 
   static const TextStyle _labelMediumTextLight = TextStyle(
-    color: _textPrimaryLight,
-    fontSize: 15,
+    color: _backgroundColorLight,
+    fontSize: 17,
   );
 
   static const TextStyle _labelSmallTextLight = TextStyle(
@@ -83,7 +83,7 @@ class Themes {
         statusBarColor: _primaryColorLight,
       ),
       iconTheme: IconThemeData(
-        color: _textPrimaryLight,
+        color: _backgroundColorLight,
       ),
     ),
     bottomAppBarTheme: const BottomAppBarTheme(
@@ -96,10 +96,11 @@ class Themes {
       primary: _primaryColorLight,
       secondary: _secondaryColorLight,
       tertiary: _tertiaryColorLight,
+      onSecondary: _textPrimaryLight,
       error: AppColors.cinnabar,
     ),
     cardTheme: CardTheme(
-      color: _primaryColorLight,
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular( 10 ),
       ),

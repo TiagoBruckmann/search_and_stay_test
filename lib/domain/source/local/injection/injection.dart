@@ -22,8 +22,8 @@ import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.I;
 
-String apiUrl = "sys-dev.searchandstay.com/api/admin/house_rules/";
-String token = "40fe071962846075452a4f6123ae71697463cad20f51e237e2035b41af0513d8";
+String apiUrl = "sys-dev.searchandstay.com";
+String pathUrl = "api/admin/house_rules/";
 
 @InjectableInit()
 void configureDependencies() {
@@ -44,6 +44,6 @@ void configureDependencies() {
   // extern
   getIt.registerFactory(() => FirebaseFirestore.instance);
   getIt.registerFactory(() => FirebaseAuth.instance);
-  getIt.registerFactory(() => http.Client);
+  getIt.registerFactory(() => http.Client());
 
 }

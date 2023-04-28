@@ -51,9 +51,9 @@ class HouseRepoImpl implements HouseRepo {
   }
 
   @override
-  Future<Either<Failure, HouseModel>> updateHouse( Map<String, dynamic> json ) async {
+  Future<Either<Failure, HouseModel>> updateHouse( String id, Map<String, dynamic> json ) async {
     try {
-      final result = await houseRemoteDatasource.updateHouse(json);
+      final result = await houseRemoteDatasource.updateHouse(id, json);
       return right(result);
     } on ServerExceptions {
       return left(ServerFailure());

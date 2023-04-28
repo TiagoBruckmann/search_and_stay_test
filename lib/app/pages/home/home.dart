@@ -25,13 +25,13 @@ class HomePage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return VerifyConnection(
-      keyAppBar: "",
+      keyAppBar: "pages.home.app_bar",
       page: BlocProvider(
         create: (create) => getIt<HomeCubit>(),
         child: BlocBuilder<HomeCubit, HomeCubitState>(
           builder: ( builder, state ) {
 
-            final bloc = BlocProvider.of<HomeCubit>(context);
+            final bloc = BlocProvider.of<HomeCubit>(builder);
 
             if ( state is HomeInitial ) {
               bloc.getHouses();
@@ -55,22 +55,23 @@ class HomePage extends StatelessWidget {
 
                     HouseEntity entity = state.listHouses[index];
 
-                    return GestureDetector(
-                      onTap: () => bloc.goToDetail(entity, false),
-                      child: Card(
-                        child: ListTile(
-                          leading: const FaIcon(
-                            FontAwesomeIcons.houseChimney,
-                            size: 20,
-                          ),
-                          title: Text(
-                            entity.name,
-                            style: theme.textTheme.displayMedium,
-                          ),
-                          subtitle: Text(
-                            FlutterI18n.translate(context, "pages.home.home.${ entity.active == 1 ? "active" : "not_active"}"),
-                            style: theme.textTheme.displaySmall,
-                          ),
+                    return Card(
+                      margin: const EdgeInsets.symmetric( horizontal: 16, vertical: 5 ),
+                      elevation: 3,
+                      child: ListTile(
+                        onTap: () => bloc.goToDetail(entity, false),
+                        leading: FaIcon(
+                          FontAwesomeIcons.houseChimney,
+                          color: theme.colorScheme.onSecondary,
+                          size: 20,
+                        ),
+                        title: Text(
+                          entity.name,
+                          style: theme.textTheme.headlineLarge,
+                        ),
+                        subtitle: Text(
+                          FlutterI18n.translate(context, "pages.home.home.${ entity.active == 1 ? "active" : "not_active"}"),
+                          style: theme.textTheme.displaySmall,
                         ),
                       ),
                     );

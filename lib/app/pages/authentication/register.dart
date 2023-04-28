@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
+    mobx.setIsRegister();
   }
 
   @override
@@ -48,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   // name
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 25),
+                    padding: const EdgeInsets.only(top: 60),
                     child: TextField(
                       controller: mobx.nameController,
                       keyboardType: TextInputType.text,
@@ -57,14 +58,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSizeFactor: 1.2,
                       ),
                       decoration: InputDecoration(
-                        labelText: FlutterI18n.translate(context, "pages.auth.email.name"),
+                        labelText: FlutterI18n.translate(context, "pages.auth.name"),
                       ),
                     ),
                   ),
 
                   // email
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 25),
+                    padding: const EdgeInsets.only(top: 15, bottom: 15),
                     child: TextField(
                       controller: mobx.emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -83,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: mobx.passwordController,
                     obscureText: (!mobx.hidePassword) ? true : false,
                     keyboardType: TextInputType.text,
-                    onSubmitted: (String value) => mobx.validateFields(true),
+                    onSubmitted: (String value) => mobx.validateEmail(),
                     textInputAction: TextInputAction.done,
                     style: theme.textTheme.bodyMedium!.apply(
                       fontSizeFactor: 1.2,
@@ -119,10 +120,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   // acessar
                   Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.only(top: 60),
                     width: MediaQuery.of(context).size.width - 130,
                     child: ElevatedButton(
-                      onPressed: () => mobx.validateFields(true),
+                      onPressed: () => mobx.validateEmail(),
                       child: Text(
                         FlutterI18n.translate(context, "btn_register"),
                         style: theme.textTheme.displayLarge,

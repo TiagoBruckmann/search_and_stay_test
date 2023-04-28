@@ -17,7 +17,7 @@ abstract class HouseRemoteDatasource {
   Future<List<HouseModel>> getHouses();
   Future<HouseModel> getDetail( String id );
   Future<HouseModel> createHouse( Map<String, dynamic> json );
-  Future<HouseModel> updateHouse( Map<String, dynamic> json );
+  Future<HouseModel> updateHouse( String id, Map<String, dynamic> json );
   Future<HouseModel> deleteHouse( String id );
 
 }
@@ -29,10 +29,11 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
   @override
   Future<List<HouseModel>> getHouses() async {
 
-    final Uri url = Uri.https(apiUrl);
+    final Uri url = Uri.https(apiUrl, pathUrl);
+    final header = await DefaultCommunication.defaultHeader;
     final response = await client.get(
       url,
-      headers: DefaultCommunication.defaultHeader,
+      headers: header,
     );
 
     if ( response.statusCode != 200 ) {
@@ -55,10 +56,12 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
   @override
   Future<HouseModel> getDetail( String id ) async {
 
-    final Uri url = Uri.https(apiUrl, id);
+    final header = await DefaultCommunication.defaultHeader;
+    final Uri url = Uri.https(apiUrl, "$pathUrl/$id");
+
     final response = await client.get(
       url,
-      headers: DefaultCommunication.defaultHeader,
+      headers: header,
     );
 
     if ( response.statusCode != 200 ) {
@@ -76,10 +79,13 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
 
   @override
   Future<HouseModel> createHouse( Map<String, dynamic> json ) async {
-    final Uri url = Uri.https(apiUrl);
+
+    final header = await DefaultCommunication.defaultHeader;
+    final Uri url = Uri.https(apiUrl, pathUrl);
+
     final response = await client.post(
       url,
-      headers: DefaultCommunication.defaultHeader,
+      headers: header,
       body: json,
     );
 
@@ -97,11 +103,13 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
   }
 
   @override
-  Future<HouseModel> updateHouse( Map<String, dynamic> json ) async {
-    final Uri url = Uri.https(apiUrl);
+  Future<HouseModel> updateHouse( String id, Map<String, dynamic> json ) async {
+    final header = await DefaultCommunication.defaultHeader;
+    final Uri url = Uri.https(apiUrl, "$pathUrl/$id");
+
     final response = await client.put(
       url,
-      headers: DefaultCommunication.defaultHeader,
+      headers: header,
       body: json,
     );
 
@@ -120,10 +128,13 @@ class HouseRemoteDatasourceImpl implements HouseRemoteDatasource {
 
   @override
   Future<HouseModel> deleteHouse( String id ) async {
-    final Uri url = Uri.https(apiUrl, id);
+
+    final header = await DefaultCommunication.defaultHeader;
+    final Uri url = Uri.https(apiUrl, "$pathUrl/$id");
+
     final response = await client.delete(
       url,
-      headers: DefaultCommunication.defaultHeader,
+      headers: header,
     );
 
     if ( response.statusCode != 200 ) {

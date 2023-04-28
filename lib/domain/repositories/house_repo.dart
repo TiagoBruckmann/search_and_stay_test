@@ -9,6 +9,6 @@ abstract class HouseRepo {
   Future<Either<Failure, List<HouseEntity>>> getHouses();
   Future<Either<Failure, HouseEntity>> getDetail( String id );
   Future<Either<Failure, HouseEntity>> createHouse( Map<String, dynamic> json );
-  Future<Either<Failure, HouseEntity>> updateHouse( Map<String, dynamic> json );
+  Future<Either<Failure, HouseEntity>> updateHouse( String id, Map<String, dynamic> json );
   Future<Either<Failure, HouseEntity>> deleteHouse( String id );
 }

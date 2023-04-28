@@ -7,8 +7,10 @@
   "btn_confirm": "Confirm",
   "pages": {
     "auth": {
+      "name": "Name",
       "email": "E-mail",
       "password": "Password",
+      "create_account": "Register!",
       "register": {
         "app_bar": "Register"
       },
@@ -20,6 +22,7 @@
     },
     "home": {
       "home": {
+        "app_bar": "Houses",
         "active": "House enable",
         "not_active":"House not enabled",
         "empty_page": "Aren't house found",

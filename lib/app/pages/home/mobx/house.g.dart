@@ -84,8 +84,8 @@ mixin _$HouseMobx on _HouseMobx, Store {
       AsyncAction('_HouseMobx.update', context: context);
 
   @override
-  Future<void> update(Map<String, dynamic> json) {
-    return _$updateAsyncAction.run(() => super.update(json));
+  Future<void> update(String id, Map<String, dynamic> json) {
+    return _$updateAsyncAction.run(() => super.update(id, json));
   }
 
   late final _$deleteAsyncAction =
@@ -122,18 +122,29 @@ mixin _$HouseMobx on _HouseMobx, Store {
   }
 
   @override
-  void validateName(bool isRegister) {
+  void validateName(bool isRegister, int? id) {
     final _$actionInfo = _$_HouseMobxActionController.startAction(
         name: '_HouseMobx.validateName');
     try {
-      return super.validateName(isRegister);
+      return super.validateName(isRegister, id);
     } finally {
       _$_HouseMobxActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  Widget validateDelete(int id) {
+  void showAlert(int id) {
+    final _$actionInfo =
+        _$_HouseMobxActionController.startAction(name: '_HouseMobx.showAlert');
+    try {
+      return super.showAlert(id);
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Widget validateDelete(String id) {
     final _$actionInfo = _$_HouseMobxActionController.startAction(
         name: '_HouseMobx.validateDelete');
     try {

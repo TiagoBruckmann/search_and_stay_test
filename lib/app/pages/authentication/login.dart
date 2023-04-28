@@ -21,11 +21,6 @@ class _LoginPageState extends State<LoginPage> {
   final AuthenticationMobx mobx = AuthenticationMobx();
 
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
@@ -48,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   // email
                   Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 25),
+                    padding: const EdgeInsets.only(top: 80, bottom: 25),
                     child: TextField(
                       controller: mobx.emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -67,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: mobx.passwordController,
                     obscureText: (!mobx.hidePassword) ? true : false,
                     keyboardType: TextInputType.text,
-                    onSubmitted: (String value) => mobx.validateFields(false),
+                    onSubmitted: (String value) => mobx.validateEmail(),
                     textInputAction: TextInputAction.done,
                     style: theme.textTheme.bodyMedium!.apply(
                       fontSizeFactor: 1.2,
@@ -80,22 +75,41 @@ class _LoginPageState extends State<LoginPage> {
                           (!mobx.hidePassword)
                             ? Icons.visibility
                             : Icons.visibility_off,
-                          color: theme.dialogTheme.contentTextStyle?.color,
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ),
                   ),
 
-                  // esqueci a senha
-                  TextButton(
-                    onPressed: () => mobx.goToForgot(),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        FlutterI18n.translate(context, "pages.auth.forgot.app_bar"),
-                        style: theme.textTheme.displayMedium,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+
+                      // esqueci a senha
+                      TextButton(
+                        onPressed: () => mobx.goToForgot(),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            FlutterI18n.translate(context, "pages.auth.forgot.app_bar"),
+                            style: theme.textTheme.displayMedium,
+                          ),
+                        ),
                       ),
-                    ),
+
+                      // cadastro
+                      TextButton(
+                        onPressed: () => mobx.goToRegister(),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            FlutterI18n.translate(context, "pages.auth.create_account"),
+                            style: theme.textTheme.displayMedium,
+                          ),
+                        ),
+                      ),
+
+                    ],
                   ),
 
                   // mensagem de erro
@@ -118,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     width: MediaQuery.of(context).size.width - 130,
                     child: ElevatedButton(
-                      onPressed: () => mobx.validateFields(false),
+                      onPressed: () => mobx.validateEmail(),
                       child: Text(
                         FlutterI18n.translate(context, "btn_login"),
                         style: theme.textTheme.displayLarge,

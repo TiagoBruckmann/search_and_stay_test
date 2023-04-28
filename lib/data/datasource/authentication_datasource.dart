@@ -56,6 +56,7 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteDatasource {
       );
 
       await db.collection("users").doc(userModel.id).set(userModel.toMap());
+      await getToken();
 
     })
     .onError((error, stackTrace) {
@@ -79,14 +80,14 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteDatasource {
       email: params["email"],
       password: params["password"],
     )
-    .then((firebaseUser) {
+    .then((firebaseUser) async {
 
       userModel = UserModel(
         firebaseUser.user!.uid,
         firebaseUser.user!.displayName!,
         params["email"],
       );
-      print("userModel => $userModel");
+      await getToken();
 
     })
     .onError((error, stackTrace) {
@@ -124,4 +125,15 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteDatasource {
     return success;
   }
 
+
+  Future<void> getToken() async {
+    await db.collection("credentials")
+      .doc("X7S0i9ULKIuNs6Uz1bL7")
+      .get().then(
+        (value)  {
+          String token = value.data()!["token"];
+          Session.localStorage.setCredential("token", token);
+        },
+      );
+  }
 }
