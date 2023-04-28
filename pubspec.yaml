@@ -2,7 +2,7 @@ name: search_and_stay
 description: Teste to mobile developer Search and Stay
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+8
+version: 1.0.0+9
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
@@ -24,7 +24,6 @@ dependencies:
   firebase_core: ^2.10.0
   firebase_auth: ^4.4.2
   flutter_i18n: ^0.32.4
-  flutter_bloc: ^8.1.2
   injectable: ^2.1.1
   equatable: ^2.0.5
   provider: ^6.0.5
@@ -42,7 +41,6 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   mobx_codegen: ^2.2.0
   build_runner: ^2.3.3
-  bloc_test: ^9.1.1
   platform: ^3.1.0
   mocktail: ^0.3.0
   mockito: ^5.4.0
