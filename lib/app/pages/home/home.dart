@@ -36,12 +36,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     Session.appEvents.sendScreen("home");
     mobx.controllerScroll = ScrollController()..addListener(() => mobx.loadMore());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-   mobx.refresh();
+    mobx.getHouses();
   }
 
   @override

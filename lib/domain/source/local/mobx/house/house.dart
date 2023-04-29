@@ -31,6 +31,9 @@ abstract class _HouseMobx with Store {
   bool isLoading = true;
 
   @observable
+  bool isRequested = true;
+
+  @observable
   HouseUseCase useCase = HouseUseCase(getIt());
 
   @observable
@@ -49,13 +52,22 @@ abstract class _HouseMobx with Store {
   void setIsLoading( bool value ) => isLoading = value;
 
   @action
+  void setIsRequested( bool value ) => isRequested = value;
+
+  @action
   Future<void> getHouses() async {
 
     final failureOrList = await useCase.getHouses();
 
     failureOrList.fold(
-      (failure) => [],
-      (success) => addToList(success),
+      (failure) {
+        [];
+        setIsRequested(false);
+      },
+      (success) {
+        addToList(success);
+        setIsRequested(false);
+      },
     );
   }
 
@@ -70,8 +82,9 @@ abstract class _HouseMobx with Store {
     if ( nextPage != null && lastPage > 1 ) {
       Session.appEvents.sharedEvent("home_load_more");
 
-      if ( controllerScroll!.position.extentAfter < scrollSize && listHouses.length < totalItems ) {
-        scrollSize -= 57;
+      if ( controllerScroll!.position.extentAfter < scrollSize && listHouses.length < totalItems && !isRequested ) {
+        setIsRequested(true);
+        scrollSize -= 70;
         await getHouses();
       }
     }
@@ -85,6 +98,7 @@ abstract class _HouseMobx with Store {
 
   @action
   void clear() {
+    setIsRequested(true);
     setIsLoading(true);
     listHouses.clear();
     clearPagination();
@@ -93,25 +107,31 @@ abstract class _HouseMobx with Store {
   }
 
   @action
-  void goToDetail( HouseEntity? houseEntity, bool isRegister ) {
+  Future<void> goToDetail( HouseEntity? houseEntity, bool isRegister ) async {
 
-    Map<String, dynamic> params = {
-      "house_entity": houseEntity,
-      "is_register": isRegister,
-    };
-
-    Navigator.pushNamed(
+    final reload = await Navigator.pushNamed(
       Session.globalContext.currentContext!,
       "/detail",
-      arguments: params,
+      arguments: {
+        "house_entity": houseEntity,
+        "is_register": isRegister,
+      },
     );
 
     if ( isRegister ) {
-      Session.appEvents.sharedEventParams("home_to_register", params);
+      Session.appEvents.sharedEvent("home_to_register");
       return;
     }
 
-    Session.appEvents.sharedEventParams("home_to_detail", params);
+    Session.appEvents.sharedEventParams("home_to_detail", {
+      "house_id": houseEntity!.id.toString(),
+      "house_name": houseEntity.name,
+      "is_register": isRegister.toString(),
+    });
+
+    if ( reload == true ) {
+      refresh();
+    }
   }
 
   @action
@@ -155,14 +175,14 @@ abstract class _HouseMobx with Store {
   @action
   Future<void> create(Map<String, dynamic> json) async {
 
-    Session.appEvents.sharedEventParams("register_create", json);
+    Session.appEvents.sharedEventParams("register_create", json["house_rules"]);
     final successOrFailure = await useCase.createHouse(json);
 
     successOrFailure.fold(
       (failure) => CustomSnackBar(messageKey: "alerts.create_failure"),
       (success) => {
         CustomSnackBar(messageKey: "alerts.create_success", color: AppColors.chateauGreen),
-        Navigator.pop(currentContext!),
+        Navigator.pop(currentContext!, true),
       },
     );
   }
@@ -170,14 +190,14 @@ abstract class _HouseMobx with Store {
   @action
   Future<void> update(String id, Map<String, dynamic> json) async {
 
-    Session.appEvents.sharedEventParams("detail_update", json);
+    Session.appEvents.sharedEventParams("detail_update", json["house_rules"]);
     final successOrFailure = await useCase.updateHouse(id, json);
 
     successOrFailure.fold(
       (failure) => CustomSnackBar(messageKey: "alerts.update_failure"),
       (success) => {
         CustomSnackBar(messageKey: "alerts.update_success", color: AppColors.chateauGreen),
-        Navigator.pop(currentContext!),
+        Navigator.pop(currentContext!, true),
       },
     );
   }
@@ -247,7 +267,7 @@ abstract class _HouseMobx with Store {
       (failure) => CustomSnackBar(messageKey: "alerts.delete_failure"),
       (success) => {
         CustomSnackBar(messageKey: "alerts.delete_success", color: AppColors.chateauGreen),
-        Navigator.pop(currentContext!),
+        Navigator.pop(currentContext!, true),
       },
     );
   }

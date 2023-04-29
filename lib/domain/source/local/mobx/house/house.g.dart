@@ -25,6 +25,22 @@ mixin _$HouseMobx on _HouseMobx, Store {
     });
   }
 
+  late final _$isRequestedAtom =
+      Atom(name: '_HouseMobx.isRequested', context: context);
+
+  @override
+  bool get isRequested {
+    _$isRequestedAtom.reportRead();
+    return super.isRequested;
+  }
+
+  @override
+  set isRequested(bool value) {
+    _$isRequestedAtom.reportWrite(value, super.isRequested, () {
+      super.isRequested = value;
+    });
+  }
+
   late final _$useCaseAtom = Atom(name: '_HouseMobx.useCase', context: context);
 
   @override
@@ -128,6 +144,15 @@ mixin _$HouseMobx on _HouseMobx, Store {
     return _$refreshAsyncAction.run(() => super.refresh());
   }
 
+  late final _$goToDetailAsyncAction =
+      AsyncAction('_HouseMobx.goToDetail', context: context);
+
+  @override
+  Future<void> goToDetail(HouseEntity? houseEntity, bool isRegister) {
+    return _$goToDetailAsyncAction
+        .run(() => super.goToDetail(houseEntity, isRegister));
+  }
+
   late final _$createAsyncAction =
       AsyncAction('_HouseMobx.create', context: context);
 
@@ -167,6 +192,17 @@ mixin _$HouseMobx on _HouseMobx, Store {
   }
 
   @override
+  void setIsRequested(bool value) {
+    final _$actionInfo = _$_HouseMobxActionController.startAction(
+        name: '_HouseMobx.setIsRequested');
+    try {
+      return super.setIsRequested(value);
+    } finally {
+      _$_HouseMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addToList(Iterable<HouseEntity> entities) {
     final _$actionInfo =
         _$_HouseMobxActionController.startAction(name: '_HouseMobx.addToList');
@@ -183,17 +219,6 @@ mixin _$HouseMobx on _HouseMobx, Store {
         _$_HouseMobxActionController.startAction(name: '_HouseMobx.clear');
     try {
       return super.clear();
-    } finally {
-      _$_HouseMobxActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void goToDetail(HouseEntity? houseEntity, bool isRegister) {
-    final _$actionInfo =
-        _$_HouseMobxActionController.startAction(name: '_HouseMobx.goToDetail');
-    try {
-      return super.goToDetail(houseEntity, isRegister);
     } finally {
       _$_HouseMobxActionController.endAction(_$actionInfo);
     }
@@ -269,6 +294,7 @@ mixin _$HouseMobx on _HouseMobx, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+isRequested: ${isRequested},
 useCase: ${useCase},
 controllerScroll: ${controllerScroll},
 nameController: ${nameController},

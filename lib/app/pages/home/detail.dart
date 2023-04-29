@@ -65,7 +65,7 @@ class _DetailPageState extends State<DetailPage> {
             GestureDetector(
               onTap: () => mobx.showAlert( widget.houseEntity!.id ),
               child: const Padding(
-                padding: EdgeInsets.only( right: 16 ),
+                padding: EdgeInsets.all(20),
                 child: FaIcon(
                   FontAwesomeIcons.trash,
                   size: 16,
