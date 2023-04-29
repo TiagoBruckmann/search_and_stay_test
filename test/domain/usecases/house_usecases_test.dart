@@ -65,7 +65,7 @@ void main() {
 
       test('when HouseRepoImpl get detail of a house return a HouseEntity', () async {
 
-        HouseModel userModel = HouseModel(
+        HouseModel houseModel = HouseModel(
           600,
           1,
           "yasmin smmmmmm",
@@ -76,7 +76,7 @@ void main() {
           mockHouseRepoImpl.getDetail("600"),
         ).thenAnswer(
           (realInvocation) => Future.value(
-            Right(userModel),
+            Right(houseModel),
           ),
         );
 
@@ -84,7 +84,7 @@ void main() {
 
         expect(result.isLeft(), false);
         expect(result.isRight(), true);
-        expect(result, Right<Failure, HouseEntity>(userModel));
+        expect(result, Right<Failure, HouseEntity>(houseModel));
         verify(mockHouseRepoImpl.getDetail("600")).called(1);
 
         verifyNoMoreInteractions(mockHouseRepoImpl);
@@ -93,7 +93,7 @@ void main() {
 
       test('when HouseRepoImpl create a house return a HouseEntity', () async {
 
-        HouseModel userModel = HouseModel(
+        HouseModel houseModel = HouseModel(
           614,
           map["house_rules"]["active"],
           map["house_rules"]["name"],
@@ -104,7 +104,7 @@ void main() {
           mockHouseRepoImpl.createHouse(map),
         ).thenAnswer(
           (realInvocation) => Future.value(
-            Right(userModel),
+            Right(houseModel),
           ),
         );
 
@@ -112,7 +112,7 @@ void main() {
 
         expect(result.isLeft(), false);
         expect(result.isRight(), true);
-        expect(result, Right<Failure, HouseEntity>(userModel));
+        expect(result, Right<Failure, HouseEntity>(houseModel));
         verify(mockHouseRepoImpl.createHouse(map)).called(1);
 
         verifyNoMoreInteractions(mockHouseRepoImpl);
@@ -121,7 +121,7 @@ void main() {
 
       test('when HouseRepoImpl update a house return a HouseEntity', () async {
 
-        HouseModel userModel = HouseModel(
+        HouseModel houseModel = HouseModel(
           613,
           map["house_rules"]["active"],
           map["house_rules"]["name"],
@@ -132,7 +132,7 @@ void main() {
           mockHouseRepoImpl.updateHouse("613", map),
         ).thenAnswer(
           (realInvocation) => Future.value(
-            Right(userModel),
+            Right(houseModel),
           ),
         );
 
@@ -140,7 +140,7 @@ void main() {
 
         expect(result.isLeft(), false);
         expect(result.isRight(), true);
-        expect(result, Right<Failure, HouseEntity>(userModel));
+        expect(result, Right<Failure, HouseEntity>(houseModel));
         verify(mockHouseRepoImpl.updateHouse("613", map)).called(1);
 
         verifyNoMoreInteractions(mockHouseRepoImpl);
